@@ -325,7 +325,6 @@ export const htmlMain = async (
   previousExecutionCache = [];
   cssCollection = {};
   resetClassNameCounters(); // Reset counters for each new generation
-  console.log("settings main", settings);
   let htmlContent = await htmlWidgetGenerator(sceneNode, settings);
 
   // remove the initial \n that is made in Container.
@@ -617,9 +616,17 @@ const htmlContainer = async (
       ) {
         imgUrl = (await exportNodeAsBase64PNG(altNode, hasChildren)) ?? "";
       } else {
-        // console.log("getPlaceholderImage", node);
-        // if
-        // imgUrl = getPlaceholderImage(node.width, node.height);
+        console.log(
+          "node",
+          node.absoluteBoundingBox?.width,
+          node.absoluteBoundingBox?.height,
+        );
+        if (node && node.absoluteBoundingBox) {
+          imgUrl = getPlaceholderImage(
+            node.absoluteBoundingBox.width,
+            node.absoluteBoundingBox.height,
+          );
+        }
       }
 
       if (hasChildren) {

@@ -27,7 +27,10 @@ app.post("/api/html", async (req, res) => {
   let passedContent = req.body.content;
   const result = await htmlMain(
     passedContent,
-    settings as PluginSettings,
+    {
+      ...settings,
+      htmlGenerationMode: "styled-components",
+    } as PluginSettings,
     true,
   );
   res.json({ success: true, data: result });
