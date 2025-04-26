@@ -1,9 +1,11 @@
+import { MIXED } from "../../common/retrieveFill";
+
 /**
  * Large (Default)
  * https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/typography/
  */
 export const swiftuiFontMatcher = (node: TextNode): string => {
-  if (node.fontSize === figma.mixed) {
+  if (node.fontSize === MIXED) {
     return "";
   }
 

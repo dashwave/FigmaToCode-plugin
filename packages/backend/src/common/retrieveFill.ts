@@ -14,3 +14,5 @@ export const retrieveTopFill = (
 
   return undefined;
 };
+
+export const MIXED = Symbol("figma.mixed");

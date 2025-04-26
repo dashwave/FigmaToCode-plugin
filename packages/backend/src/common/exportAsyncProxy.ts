@@ -1,4 +1,4 @@
-import { postConversionStart } from "../messaging";
+// import { postConversionStart } from "../messaging";
 
 let isRunning = false;
 
@@ -16,7 +16,7 @@ export const exportAsyncProxy = async <
 ): Promise<T> => {
   if (isRunning === false) {
     isRunning = true;
-    postConversionStart();
+    // postConversionStart();
     // force postMessage to run right now.
     await new Promise((resolve) => setTimeout(resolve, 30));
   }

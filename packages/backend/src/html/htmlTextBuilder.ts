@@ -12,6 +12,7 @@ import {
   stylesToCSS,
   getComponentName,
 } from "./htmlMain";
+import { MIXED } from "../common/retrieveFill";
 
 export class HtmlTextBuilder extends HtmlDefaultBuilder {
   constructor(node: TextNode, settings: HTMLSettings) {
@@ -126,7 +127,7 @@ export class HtmlTextBuilder extends HtmlDefaultBuilder {
   }
 
   fontSize(node: TextNode, isUI = false): this {
-    if (node.fontSize !== figma.mixed) {
+    if (node.fontSize !== MIXED) {
       const value = isUI ? Math.min(node.fontSize, 24) : node.fontSize;
       this.addStyles(formatWithJSX("font-size", this.isJSX, value));
     }

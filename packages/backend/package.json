@@ -10,7 +10,9 @@
     "dist/**"
   ],
   "scripts": {
-    "lint": "eslint \"src/**/*.ts*\""
+    "lint": "eslint \"src/**/*.ts*\"",
+    "dev": "tsup src/index.ts --watch --onSuccess \"node dist/index.js\"",
+    "server": "tsup src/server.ts --watch --onSuccess \"node dist/server.js\""
   },
   "dependencies": {
     "@figma/plugin-typings": "^1.109.0",
@@ -18,9 +20,11 @@
     "nanoid": "^5.1.5",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "types": "workspace:*"
+    "types": "workspace:*",
+    "express": "^5.1.0"
   },
   "devDependencies": {
+    "@types/express": "^5.0.1",
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",
     "eslint": "^9.23.0",

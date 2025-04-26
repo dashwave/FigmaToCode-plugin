@@ -325,7 +325,7 @@ export const htmlMain = async (
   previousExecutionCache = [];
   cssCollection = {};
   resetClassNameCounters(); // Reset counters for each new generation
-
+  console.log("settings main", settings);
   let htmlContent = await htmlWidgetGenerator(sceneNode, settings);
 
   // remove the initial \n that is made in Container.
@@ -439,15 +439,15 @@ const htmlWrapSVG = (
   settings: HTMLSettings,
 ): string => {
   if (node.svg === "") return "";
-  
+
   const builder = new HtmlDefaultBuilder(node, settings)
     .addData("svg-wrapper")
     .position();
-  
+
   // The SVG content already has the var() references, so we don't need
   // to add inline CSS variables in most cases. The browser will use the fallbacks
   // if the variables aren't defined in the CSS.
-  
+
   return `\n<div${builder.build()}>\n${node.svg ?? ""}</div>`;
 };
 
@@ -617,7 +617,9 @@ const htmlContainer = async (
       ) {
         imgUrl = (await exportNodeAsBase64PNG(altNode, hasChildren)) ?? "";
       } else {
-        imgUrl = getPlaceholderImage(node.width, node.height);
+        // console.log("getPlaceholderImage", node);
+        // if
+        // imgUrl = getPlaceholderImage(node.width, node.height);
       }
 
       if (hasChildren) {

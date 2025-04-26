@@ -14,6 +14,7 @@ import { numberToFixedString } from "../common/numToAutoFixed";
 import { getCommonRadius } from "../common/commonRadius";
 import { commonStroke } from "../common/commonStroke";
 import { generateRotationMatrix } from "./builderImpl/flutterBlend";
+import { MIXED } from "../common/retrieveFill";
 
 export const flutterContainer = (node: SceneNode, child: string): string => {
   // ignore the view when size is zero or less
@@ -64,7 +65,7 @@ export const flutterContainer = (node: SceneNode, child: string): string => {
       "BoxDecoration()",
     );
     properties.decoration = clipBehavior ? propBoxDecoration : parsedDecoration;
-    
+
     const isEmptyProps = hasEmptyProps(properties);
     if (isEmptyProps) {
       result = child;
@@ -110,7 +111,7 @@ const hasEmptyProps = (props: Record<string, string>): boolean => {
     isEmpty = isEmpty && skipDefaultProperty(value, defValue).length == 0;
   }
   return isEmpty;
-}
+};
 
 const getDecoration = (node: SceneNode): string => {
   if (!("fills" in node)) {
@@ -127,7 +128,7 @@ const getDecoration = (node: SceneNode): string => {
     shapeDecorationBorder = generatePolygonBorder(node);
   } else if (node.type === "ELLIPSE") {
     shapeDecorationBorder = generateOvalBorder(node);
-  } else if ("strokeWeight" in node && node.strokeWeight !== figma.mixed) {
+  } else if ("strokeWeight" in node && node.strokeWeight !== MIXED) {
     shapeDecorationBorder = skipDefaultProperty(
       generateRoundedRectangleBorder(node),
       "RoundedRectangleBorder()",
@@ -206,7 +207,7 @@ const generateStarBorder = (node: StarNode): string => {
   const innerRadiusRatio = node.innerRadius;
   const cornerRadius = node.cornerRadius;
 
-  const pointRounding = cornerRadius === figma.mixed ? 0 : cornerRadius;
+  const pointRounding = cornerRadius === MIXED ? 0 : cornerRadius;
   const valleyRounding = 0; // Assuming no valley rounding, modify if needed
   const rotation = 0; // Assuming no rotation, modify if needed
   const squash = 0; // Assuming no squash, modify if needed
